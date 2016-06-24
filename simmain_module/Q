@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<ncurses.h>
+#include<unistd.h>
+#define LIFEMAXW 150
+#define LIFEMAXH 50 
+#define FORIGINX 1
+#define FORIGINY 1
+		
+void simshow(void){
+		int i,j;
+		for(i=FORIGINY-1;i<=LIFEMAXH+2;i++){
+			/* mvprintw(i,0,"%d",i); */
+			mvaddch(i,0,'|');
+			mvaddch(i,LIFEMAXW+2,'|');
+		}
+		for(i=FORIGINX ;i<LIFEMAXW+2;i++){
+			/* addstr("-"); */
+			/* mvprintw(0,i,"%d",i%10); */
+			mvaddch(0,i,'-');
+			mvaddch(LIFEMAXH+2,i,'-');
+		}
+		refresh();
+		return;
+}
+void stopmode(void){
+	int ch;
+	while(1){
+		ch=getch();
+		if(ch=='s')return;
+	}
+}
+void simmain(int life_pt[LIFEMAXW][LIFEMAXH]){
+		int cntgn=0;
+		int ch;
+		clear();
+		while(1){	
+			ch = getch();
+			simshow();
+			cntgn++;
+			mvprintw(50,56,"%d generation",cntgn);
+			refresh();
+			if(ch == 's'){
+				return;
+			}
+			usleep(100000);
+		}
+		refresh();
+		return;
+}
+/////////////////////////////////////////
+int main(int argc, char *argv[]){
+		int MaxH,MaxW;						// max high and width
+		int life_pt[LIFEMAXW][LIFEMAXH];
+		initscr();
+		crmode();
+		noecho();
+		clear();
+		refresh();
+		if(argc>1){
+				fprintf(stderr,"Don't use arguments\n");
+				return 1;
+		}
+		timeout(0);
+		simmain(life_pt);
+		getmaxyx(stdscr,MaxH,MaxW);
+		mvprintw(0,0,"h%d :w%d\n",MaxH,MaxW);
+		refresh();
+		sleep(1);
+		endwin();
+		return 0;
+}
