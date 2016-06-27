@@ -1,2 +1,2 @@
 # SeE_lifegame
-#test
+test
