@@ -62,7 +62,7 @@ int stopmode(LIFE life_pt[],int *cnt){
 		usleep(1);
 	}
 }
-void simmain(LIFE life_pt[],int SPEED){
+void simmain(LIFE life_pt[],GAMEINFO info){
 	int cntgn=0;
 	int remode;
 	int ch;
@@ -85,7 +85,7 @@ void simmain(LIFE life_pt[],int SPEED){
 			calc_nextGN(life_pt);
 
 		}
-		usleep(SPEED); /* speed */
+		usleep(info.speed); /* speed */
 	}
 	refresh();
 	return;

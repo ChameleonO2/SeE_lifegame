@@ -4,7 +4,7 @@
 /* simmain.h */
 #include"lifegame.h"
 
-void simmain(LIFE [],int);
+void simmain(LIFE [],GAMEINFO);
 void simshow();
 void print_life(LIFE []);
 

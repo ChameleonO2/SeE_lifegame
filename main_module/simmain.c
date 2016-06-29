@@ -4,8 +4,8 @@
 #include"simmain.h"
 #include"lifegame.h"
 
-void simmain(LIFE life_pt[],int SPEED){
-		mvprintw(10,10,"simmain now%d",SPEED);
+void simmain(LIFE life_pt[],GAMEINFO info){
+		mvprintw(10,10,"simmain now%d",info.speed);
 		simshow();
 		print_life(life_pt);
 		refresh();

@@ -5,10 +5,10 @@
 #include"lifegame.h"
 #include"setting.h"
 
-void setting_main(int* speed){
+void setting_main(GAMEINFO* info){
 		clear();
 		mvprintw(10,10,"setting_main now");
-		*speed=200000;
+		info->speed=200000;
 		refresh();
 
 		sleep(1);

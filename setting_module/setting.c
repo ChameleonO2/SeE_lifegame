@@ -8,6 +8,7 @@
 void setting_main(int* speed){
 		clear();
 		mvprintw(10,10,"setting_main now");
+		
 		*speed=200000;
 		refresh();
 

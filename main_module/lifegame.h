@@ -14,6 +14,11 @@ typedef struct{
 	int y;
 	int live;
 }LIFE;
+typedef struct{
+	int maxh;
+	int maxw;
+	int speed;
+}GAMEINFO;
 
 #endif
 

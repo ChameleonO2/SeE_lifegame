@@ -3,11 +3,8 @@
 #include<ncurses.h>
 #include<unistd.h>
 #include<time.h>
-#include"simmain.h"
 #include"lifegame.h"
 #include"setting.h"
-#include"helpshow.h"
-#include"getsize.h"
 void rand_life(LIFE life_pt[]){
 		int i;
 		srand((unsigned)time(NULL));
@@ -35,6 +32,7 @@ void menu_show(int x,int y){
 int main(int argc, char *argv[]){
 		int MaxH,MaxW;
 		int ch;
+		int speed;
 		LIFE life_pt[LIFEMAXW*LIFEMAXH];
 		rand_life(life_pt);
 		initscr();
@@ -54,9 +52,7 @@ int main(int argc, char *argv[]){
 		while(ch!='0'){
 				menu_show(MaxW,MaxH);
 				ch=getch();
-				if(ch=='1')simmain(life_pt);
-				if(ch=='2')setting_main();
-				if(ch=='3')help_show();
+				if(ch=='2')setting_main(&speed);
 				clear();
 
 		}

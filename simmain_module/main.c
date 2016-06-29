@@ -11,6 +11,7 @@ int main(int argc, char *argv[]){
 	int MaxH,MaxW;						/*max high and width*/
 	int i;
 	LIFE life_pt[LIFEMAXW*LIFEMAXH];
+	GAMEINFO info;
 
 
 	srand((unsigned)time(NULL));
@@ -22,6 +23,7 @@ int main(int argc, char *argv[]){
 		life_pt[i].x=i%LIFEMAXW+FORIGINX;
 		life_pt[i].y=i/LIFEMAXW+FORIGINX;
 	}
+	info.speed=100000;
 	/* life_pt[320].live=0;life_pt[321].live=1;life_pt[322].live=0; */
 	/* life_pt[470].live=0;life_pt[471].live=1;life_pt[473].live=0; */
 	/* life_pt[620].live=0;life_pt[621].live=1;life_pt[623].live=0; */
@@ -36,7 +38,7 @@ int main(int argc, char *argv[]){
 		return 1;
 	}
 	timeout(0);
-	simmain(life_pt,100000);
+	simmain(life_pt,info);
 	getmaxyx(stdscr,MaxH,MaxW);
 	clear();
 	mvprintw(0,0,"h%d :w%d\n",MaxH,MaxW);

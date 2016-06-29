@@ -21,23 +21,51 @@ void rand_life(LIFE life_pt[]){
 		}
 
 } 
-void menu_show(int x,int y){
+void menu_show(GAMEINFO dsp){
 		clear();
-		mvprintw(y/2-7,x/2-5,"Life Game!");
-		mvprintw(y/2+5,x/2-5,"1:start simulation!");
-		mvprintw(y/2+6,x/2-5,"2:settings");
-		mvprintw(y/2+7,x/2-5,"3:help");
-		mvprintw(y/2+8,x/2-5,"0:quit");
+		mvprintw(dsp.maxh/2-7,dsp.maxw/2-5,"Life Game!");
+		mvprintw(dsp.maxh/2+5,dsp.maxw/2-5,"1:start simulation!");
+		mvprintw(dsp.maxh/2+6,dsp.maxw/2-5,"2:settings");
+		mvprintw(dsp.maxh/2+7,dsp.maxw/2-5,"3:help");
+		mvprintw(dsp.maxh/2+8,dsp.maxw/2-5,"0:quit");
 		refresh();
-
 		return;
 }
 int main(int argc, char *argv[]){
 		int MaxH,MaxW;
 		int ch;
-		int speed;
 		FILE *fp;
+		char tmp[100];
+		GAMEINFO info;
 		LIFE life_pt[LIFEMAXW*LIFEMAXH];
+
+
+		/* error and read file */
+		if(argc>1){
+			fprintf(stderr,"引数を指定せずに実行してください．\n");
+			exit(1);
+		}
+		if((fp=fopen("setting.lfs","r"))==NULL){
+			fprintf(stderr,"setting.lfsファイルが見つかりません．自動生成します．\n");
+			system("echo \"100000\">setting.lfs ");
+			exit(1);
+		}
+		if(fgets(tmp,100,fp)!=NULL){
+			printf("setting.lfs = %s\n",tmp);
+			info.speed=atoi(tmp);
+		}else{
+			fclose(fp);
+			fprintf(stderr,"setting.lfsファイルに異常があります．自動修正します．\n");
+			system("echo \"100000\">setting.lfs ");
+			exit(1);
+		}
+		fclose(fp);
+		if(info.speed<5000||info.speed>600000){
+			fprintf(stderr,"setting.lfsファイルに異常があります．自動修正します．\n");
+			system("echo \"100000\">setting.lfs ");
+			exit(1);
+		}
+		/* end of error and read file */
 		rand_life(life_pt);
 		initscr();
 		crmode();
@@ -45,20 +73,19 @@ int main(int argc, char *argv[]){
 		cbreak();
 		keypad(stdscr,TRUE);
 		timeout(-1);
-		speed=100000;
 		clear();
-		getmaxyx(stdscr,MaxH,MaxW);
-		if(MaxH<LIFEMAXH||MaxW<LIFEMAXW+30){
+		getmaxyx(stdscr,info.maxh,info.maxw);
+		if(info.maxh < LIFEMAXH || info.maxw < LIFEMAXW+30){
 				endwin();
 				fprintf(stderr,"Run in larger size than %dColumns * %dlines\n",LIFEMAXW+30,LIFEMAXH);
 				exit(1);
 		}
-				menu_show(MaxW,MaxH);
+		menu_show(info);
 		while(ch!='0'){
-				menu_show(MaxW,MaxH);
+				menu_show(info);
 				ch=getch();
-				if(ch=='1')simmain(life_pt,speed);
-				if(ch=='2')setting_main(&speed);
+				if(ch=='1')simmain(life_pt,info);
+				if(ch=='2')setting_main(&info);
 				if(ch=='3')help_show();
 				clear();
 
