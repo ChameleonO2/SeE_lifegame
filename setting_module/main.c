@@ -35,7 +35,9 @@ int main(int argc, char *argv[]){
 		int speed;
 		LIFE life_pt[LIFEMAXW*LIFEMAXH];
 		GAMEINFO info;
-		info.speed=10000;
+		info.speed=1000000;
+		info.maxh=50;
+		info.maxw=100;
 		rand_life(life_pt);
 		initscr();
 		crmode();
@@ -56,7 +58,6 @@ int main(int argc, char *argv[]){
 				ch=getch();
 				if(ch=='2')setting_main(&info);
 				clear();
-
 		}
 		endwin();
 		return 0;
