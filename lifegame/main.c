@@ -84,10 +84,13 @@ int main(int argc, char *argv[]){
 		while(ch!='0'){
 				menu_show(info);
 				ch=getch();
-				if(ch=='1')simmain(life_pt,info);
+				if(ch=='1'){
+						timeout(0);
+						simmain(life_pt,info);
+						timeout(-1);
+				}
 				if(ch=='2')setting_main(&info);
 				if(ch=='3')help_show();
-				hogioiww();
 				clear();
 
 		}

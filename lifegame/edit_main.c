@@ -17,7 +17,7 @@ int toggle_life(int live){
 	if(live==0)return 1;
 	else return 0;
 }
-void rand_life(LIFE life_pt[]){
+void rand_life2(LIFE life_pt[]){
 		int i;
 		srand((unsigned)time(NULL));
 		for(i=0;i<LIFEMAXW*LIFEMAXH;i++){
@@ -65,7 +65,7 @@ void edit_main(LIFE life_pt[]){
 		mvprintw(LIFEMAXH/2+5,LIFEMAXW+5,"Space key :toggle Life and Death");
 		ch=getch();
 		if(ch==' ')life_pt[xy].live=toggle_life(life_pt[xy].live); 
-		if(ch=='r')rand_life(life_pt);
+		if(ch=='r')rand_life2(life_pt);
 		if(ch=='c')clear_life(life_pt);
 	}
 	timeout(0);
