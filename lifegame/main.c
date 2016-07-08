@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<ncurses.h>
+#include<locale.h>
 #include<unistd.h>
 #include<time.h>
 #include"simmain.h"
@@ -67,6 +68,7 @@ int main(int argc, char *argv[]){
 		}
 		/* end of error and read file */
 		rand_life(life_pt);
+		setlocale(LC_ALL,"");
 		initscr();
 		crmode();
 		noecho();

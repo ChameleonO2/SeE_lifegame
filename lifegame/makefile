@@ -1,5 +1,5 @@
 lifegame: getsize.o helpshow.o main.o setting.o simmain.o calc_next.o edit_main.o 
-	gcc main.o setting.o helpshow.o getsize.o simmain.o calc_next.o edit_main.o -lncurses -o lifegame
+	gcc main.o setting.o helpshow.o getsize.o simmain.o calc_next.o edit_main.o -lncursesw -o lifegame
 getsize.o: getsize.c lifegame.h getsize.h
 	gcc -c getsize.c -o getsize.o 
 helpshow.o: helpshow.c lifegame.h helpshow.h

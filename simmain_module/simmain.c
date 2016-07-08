@@ -17,6 +17,8 @@ void print_field(void){
 		/* mvprintw(0,i,"%d",i%10); */
 		mvaddch(0,i,'-');
 		mvaddch(LIFEMAXH+1,i,'-');
+		
+	
 	}
 	return;
 
@@ -90,3 +92,4 @@ void simmain(LIFE life_pt[],GAMEINFO info){
 	refresh();
 	return;
 }
+
