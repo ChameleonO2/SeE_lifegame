@@ -33,8 +33,7 @@ int main(int argc, char *argv[]){
 		char tmp[100];
 		GAMEINFO info;
 		LIFE life_pt[LIFEMAXW*LIFEMAXH];
-
-
+		
 		/* error and read file */
 		if(argc>1){
 			fprintf(stderr,"引数を指定せずに実行してください．\n");
@@ -61,6 +60,7 @@ int main(int argc, char *argv[]){
 			exit(1);
 		}
 		/* end of error and read file */
+
 		rand_life(life_pt);
 		setlocale(LC_ALL,"");
 		initscr();
