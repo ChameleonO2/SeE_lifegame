@@ -85,7 +85,7 @@ int main(int argc, char *argv[]){
 		getmaxyx(stdscr,info.maxh,info.maxw);
 		if(info.maxh < LIFEMAXH || info.maxw < LIFEMAXW+30){
 				endwin();
-				fprintf(stderr,"Run in larger size than %dColumns * %dlines\n",LIFEMAXW+30,LIFEMAXH);
+				fprintf(stderr,"ウィンドウは %d列 * %d行で実行してください．\n",LIFEMAXW+30,LIFEMAXH);
 				exit(1);
 		}
 		menu_show(info);
