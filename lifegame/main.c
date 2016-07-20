@@ -19,7 +19,9 @@ void rand_life(LIFE life_pt[]){
 						life_pt[i].live=0;
 				life_pt[i].x=i%LIFEMAXW+FORIGINX;
 				life_pt[i].y=i/LIFEMAXW+FORIGINX;
+				
 		}
+		
 
 } 
 void menu_show(GAMEINFO dsp){
@@ -37,8 +39,11 @@ int main(int argc, char *argv[]){
 		int ch;
 		FILE *fp;
 		char tmp[100];
+		int baf2,i;
 		GAMEINFO info;
 		LIFE life_pt[LIFEMAXW*LIFEMAXH];
+		
+		
 
 
 		/* error and read file */
@@ -75,6 +80,7 @@ int main(int argc, char *argv[]){
 		cbreak();
 		keypad(stdscr,TRUE);
 		timeout(-1);
+		start_color();
 		clear();
 		getmaxyx(stdscr,info.maxh,info.maxw);
 		if(info.maxh < LIFEMAXH || info.maxw < LIFEMAXW+30){
@@ -93,6 +99,26 @@ int main(int argc, char *argv[]){
 				}
 				if(ch=='2')setting_main(&info);
 				if(ch=='3')help_show();
+				if(ch=='/'){
+					mvprintw(info.maxh/2-6,info.maxw/2-5,"EX mode");
+					refresh();
+					if((ch=getch())=='d'){ if((ch=getch())=='e'){ if((ch=getch())=='m'){ if((ch=getch())=='o'){
+						if((fp=fopen("lifedate.ld","r"))==NULL){
+							fprintf(stderr,"lifedate.ldファイルが見つかりません．\n");
+							endwin();
+							exit(1);
+						}
+						for(i=0;i<LIFEMAXW*LIFEMAXH;i++){
+							fscanf(fp,"%d",&baf2);
+							life_pt[i].live=baf2;
+						}
+						mvprintw(info.maxh/2-6,info.maxw/2-5,"demo mode");
+						refresh();
+						fclose(fp);
+						sleep(1);
+					} } } }
+
+				}
 				clear();
 
 		}

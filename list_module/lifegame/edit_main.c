@@ -35,6 +35,14 @@ void clear_life(LIFE life_pt[]){
 		}
 		return ;
 }
+void outlife(LIFE life_pt[]){
+	char str[10];
+	int i;
+	for(i=0;i<LIFEMAXH*LIFEMAXW;i++){
+		sprintf(str,"echo %d >> lifedate.ld",life_pt[i].live);
+		system(str);
+	}
+}
 void edit_main(LIFE life_pt[]){
 	int ch,xy;
 	CURSOR c;
@@ -67,6 +75,7 @@ void edit_main(LIFE life_pt[]){
 		if(ch==' ')life_pt[xy].live=toggle_life(life_pt[xy].live); 
 		if(ch=='r')rand_life2(life_pt);
 		if(ch=='c')clear_life(life_pt);
+		if(ch=='p')outlife(life_pt);
 	}
 	timeout(0);
 	return ;

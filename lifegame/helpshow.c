@@ -19,7 +19,7 @@ void help_show(void){
 				exit(1);
 		}
 		while(fgets(msg,100,fp2)!=NULL){
-				mvprintw(5+i,10,"%s",msg);
+				mvprintw((LIFEMAXH/2-10)+i,LIFEMAXW/2-10,"%s",msg);
 				i++;
 				refresh();
 				if(msg[0]=='#'){

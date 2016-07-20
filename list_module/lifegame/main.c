@@ -27,8 +27,12 @@ void menu_show(GAMEINFO dsp){
 		return;
 }
 int main(int argc, char *argv[]){
+		char baf[2];
+		int baf2;
 		int MaxH,MaxW;
 		int ch;
+		int i;
+
 		FILE *fp;
 		char tmp[100];
 		GAMEINFO info;
@@ -76,6 +80,17 @@ int main(int argc, char *argv[]){
 				fprintf(stderr,"Run in larger size than %dColumns * %dlines\n",LIFEMAXW+30,LIFEMAXH);
 				exit(1);
 		}
+		if((fp=fopen("lifedate.ld","r"))==NULL){
+			fprintf(stderr,"setting.lfsファイルが見つかりません．自動生成します．\n");
+			system("echo \"100000\">setting.lfs ");
+			endwin();
+			exit(1);
+		}
+		for(i=0;i<LIFEMAXW*LIFEMAXH;i++){
+			fscanf(fp,"%d",&baf2);
+			life_pt[i].live=baf2;
+		}
+		fclose(fp);
 		menu_show(info);
 		while(ch!='0'){
 				menu_show(info);
