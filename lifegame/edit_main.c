@@ -7,10 +7,16 @@
 #include<time.h>
 #define SPEED 100000
 
-void edit_show(LIFE life_pt[],CURSOR c){
+void edit_show(LIFE life_pt[],CURSOR c,int xy){
 	simshow();
 	print_life(life_pt);
+	if(life_pt[xy].live==1){
+	attrset(COLOR_PAIR(2));
+	}else{
+	attrset(COLOR_PAIR(3));
+	}
 	mvprintw(c.y,c.x,"X");
+	attrset(COLOR_PAIR(4));
 	return;
 }
 int toggle_life(int live){
@@ -54,7 +60,7 @@ void edit_main(LIFE life_pt[]){
 		if(c.y-FORIGINY<0)c.y=LIFEMAXH;
 			/*end cursor keys */
 		xy=(c.y-1)*LIFEMAXW+c.x-1;
-		edit_show(life_pt,c);
+		edit_show(life_pt,c,xy);
 		mvprintw(LIFEMAXH/2-10,LIFEMAXW+5,"EDIT MODE");
 		mvprintw(LIFEMAXH/2-5,LIFEMAXW+5,"LIFE STATUS");
 		mvprintw(LIFEMAXH/2-4,LIFEMAXW+5,"(%3d,%2d)=%d",life_pt[xy].x,life_pt[xy].y,life_pt[xy].live);

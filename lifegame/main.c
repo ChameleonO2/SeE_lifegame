@@ -81,8 +81,14 @@ int main(int argc, char *argv[]){
 		keypad(stdscr,TRUE);
 		timeout(-1);
 		start_color();
+		init_pair(1,COLOR_GREEN,COLOR_BLACK);
+		init_pair(2,COLOR_WHITE,COLOR_BLACK);
+		init_pair(3,COLOR_RED,COLOR_BLACK);
+		init_pair(4,COLOR_CYAN,COLOR_BLACK);
+		bkgd(COLOR_PAIR(2));
 		clear();
 		getmaxyx(stdscr,info.maxh,info.maxw);
+		attrset(COLOR_PAIR(1));
 		if(info.maxh < LIFEMAXH || info.maxw < LIFEMAXW+30){
 				endwin();
 				fprintf(stderr,"ウィンドウは %d列 * %d行で実行してください．\n",LIFEMAXW+30,LIFEMAXH);
@@ -112,8 +118,10 @@ int main(int argc, char *argv[]){
 							fscanf(fp,"%d",&baf2);
 							life_pt[i].live=baf2;
 						}
+						attrset(COLOR_PAIR(3));
 						mvprintw(info.maxh/2-6,info.maxw/2-5,"demo mode");
 						refresh();
+						attrset(COLOR_PAIR(1));
 						fclose(fp);
 						sleep(1);
 					} } } }

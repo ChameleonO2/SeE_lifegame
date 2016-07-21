@@ -6,7 +6,7 @@ typedef struct {
 	int x;
 	int y;
 }CURSOR;
-void edit_show(LIFE [],CURSOR);
+void edit_show(LIFE [],CURSOR,int);
 void edit_main(LIFE []);
 
 #endif

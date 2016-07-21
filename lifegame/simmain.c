@@ -37,7 +37,9 @@ void print_life(LIFE life_pt[]){
 int stopmode(LIFE life_pt[],int *cnt){
 	int ch;
 	simshow();
+	attrset(COLOR_PAIR(3));
 	mvprintw(LIFEMAXH/2-10,LIFEMAXW+5,"STOP SIMULATION");
+	attrset(COLOR_PAIR(1));
 	mvprintw(LIFEMAXH/2+1,LIFEMAXW+5,"e key :Go to Edit mode!");
 	mvprintw(LIFEMAXH/2+2,LIFEMAXW+5,"q key :End Simulation!");
 	while(1){
@@ -48,10 +50,14 @@ int stopmode(LIFE life_pt[],int *cnt){
 		}
 		if(ch=='q')return 1;
 		if(ch=='e'){
+			attrset(COLOR_PAIR(4));
 			edit_main(life_pt);
+			attrset(COLOR_PAIR(1));
 			clear();
 			simshow();
+			attrset(COLOR_PAIR(3));
 			mvprintw(LIFEMAXH/2-10,LIFEMAXW+5,"STOP SIMULATION");
+			attrset(COLOR_PAIR(1));
 			mvprintw(LIFEMAXH/2,LIFEMAXW+5,"s key :toggle stop simulation!");
 			mvprintw(LIFEMAXH/2+1,LIFEMAXW+5,"e key :Go Edit mode!");
 			mvprintw(LIFEMAXH/2+2,LIFEMAXW+5,"q key :End Simulation");
